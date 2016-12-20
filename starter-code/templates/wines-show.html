@@ -1,1 +1,32 @@
-Welcome to Wine Show (templates/wines-show.html)
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WineShow</title>
+</head>
+<body>
+  <div class="container-fluid">
+  	<div class="container col-sm-12 col-md-12">
+    <table class="table table-striped table-hover table-bordered">
+    	<h1>Ahhhhhh, great choice monsieur</h1>
+		<tr>
+			<th>Name</th>
+			<th>Year</th>
+			<th>Country</th>
+			<th>Price</th>
+			<th>Description</th>
+		</tr>				
+		<tr>
+			<td>{{winesShow.showWine.name}}</td>
+			<td>{{winesShow.showWine.year}}</td>
+			<td>{{winesShow.showWine.country}}</td>
+			<td>{{winesShow.showWine.price}}</td>
+			<td>{{winesShow.showWine.description}}</td>
+		</tr>
+	</table>
+	</div>
+  </div>
+  <div class="container text-center">
+	<img src={{winesShow.showWine.picture}}>
+  </div>
+</body>
+</html>

@@ -1,6 +1,23 @@
-var app = angular.module('wineApp', [])
+var app = angular.module('wineApp', ['ngRoute'])
     .controller('WinesIndexController',WinesIndexController)
     .controller('WinesShowController',WinesShowController);
+
+app.config(function($routeProvider, $locationProvider){
+    $routeProvider
+        .when('/', {
+            templateUrl : '/templates/wines-index.html',
+            controller : 'WinesIndexController as winesIndex'
+        })
+        .when('/wines/:id', {
+            templateUrl : '/templates/wines-show.html',
+            controller : 'WinesShowController as winesShow'
+        });
+    $locationProvider
+        .html5Mode({
+              enabled: true,
+              requireBase: false
+    });
+});
 
 console.log('Angular is working.');
 
@@ -13,14 +30,16 @@ console.log('Angular is working.');
 // CONTROLLERS //
 /////////////////
 
-WinesIndexController.$inject = ['$scope'];
-function WinesIndexController($scope){
-  console.log("Wine Index");
+WinesIndexController.$inject = ['$scope', 'WineFactory'];
+function WinesIndexController($scope, WineFactory){
+  var vm = this;
+  vm.allWines=WineFactory.query();
 }
 
-WinesShowController.$inject = ['$scope'];
-function WinesShowController($scope){
-  console.log("Wine Show");
+WinesShowController.$inject = ['$scope', 'WineFactory', '$routeParams'];
+function WinesShowController($scope, WineFactory, $routeParams){
+  var vm = this;
+  vm.showWine=WineFactory.get($routeParams.id);
 }
 
 ////////////
@@ -45,16 +64,6 @@ app.factory('WineFactory', function(){
   return WineFactory;
 
 });
-
-
-
-
-
-
-
-
-
-
 
 /*
  * Temporary Mock JSON

@@ -1,1 +1,31 @@
-Welcome to Wine Index (templates/wines-index.html)
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WineList</title>
+</head>
+<body>
+  <div class="container-fluid">
+  	<div class="container col-sm-12 col-md-12">
+    <table class="table table-striped">
+		<input type="text" placeholder="search" ng-model="searchText">
+		<tr>
+			<th>Name</th>
+			<th>Year</th>
+			<th>Country</th>
+			<th>Price</th>
+			<th>Description</th>
+		</tr>				
+		<tr ng-repeat="wine in winesIndex.allWines | filter:searchText">
+			<td><a href="/wines/{{wine.id}}">{{wine.name}}</a></td>
+			<td>{{wine.year}}</td>
+			<td>{{wine.country}}</td>
+			<td>{{wine.price}}</td>
+			<td>{{wine.description}}</td>
+			<img src="{{wine.picture}}">
+		</tr>
+	</table>
+	</div>
+  </div>
+</body>
+</html>
+
